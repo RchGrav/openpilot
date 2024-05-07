@@ -293,16 +293,14 @@ class CAR(Platforms):
     CarSpecs(mass=1513, wheelbase=2.84, steerRatio=13.27 * 1.15, tireStiffnessFactor=0.65),  # 15% higher at the center seems reasonable
     flags=HyundaiFlags.MANDO_RADAR | HyundaiFlags.CHECKSUM_CRC8,
   )
-  SONATA_2024 = HyundaiPlatformConfig(
-    "HYUNDAI SONATA 2024",
+  SONATA_2024 = HyundaiCanFDPlatformConfig(
     [HyundaiCarDocs("Hyundai Sonata 2024", "All", car_parts=CarParts.common([CarHarness.hyundai_a]))],
-    CarSpecs(mass=1513, wheelbase=2.84, steerRatio=13.27 * 1.15, tireStiffnessFactor=0.65),  # 15% higher at the center seems reasonable
-    flags=HyundaiFlags.MANDO_RADAR | HyundaiFlags.CHECKSUM_CRC8,
+    CarSpecs(mass=1602, wheelbase=2.84, steerRatio=12.35, tireStiffnessFactor=0.65),  # https://www.hyundainews.com/assets/documents/original/57218-2024SonataSpecs092123.pdf
   )
   SONATA_LF = HyundaiPlatformConfig(
     "HYUNDAI SONATA 2019",
     [HyundaiCarDocs("Hyundai Sonata 2018-19", car_parts=CarParts.common([CarHarness.hyundai_e]))],
-    CarSpecs(mass=1536, wheelbase=2.804, steerRatio=13.27 * 1.15),  # 15% higher at the center seems reasonable
+    CarSpecs(mass=1536, wheelbase=2.84, steerRatio=13.27 * 1.15),  # 15% higher at the center seems reasonable
 
     flags=HyundaiFlags.UNSUPPORTED_LONGITUDINAL | HyundaiFlags.TCU_GEARS,
   )
