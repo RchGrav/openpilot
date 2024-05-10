@@ -112,7 +112,7 @@ appendWindowsPath = false
 After saving your changes and exiting the editor, you'll need to restart WSL to apply the new configurations. Now, while you could manually close each WSL session and patiently wait for about 8 seconds, let’s be real—ain’t nobody got time for that! Instead, do what the pros do. Once you’ve confirmed that everything is saved, simply run the following command to instantly shut down all WSL sessions:
 
 ```
-wsl --shutdown
+wsl.exe --shutdown
 ```
 *This command ensures that all changes are applied promptly and you can start fresh with your newly configured settings. *
 
