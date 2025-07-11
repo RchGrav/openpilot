@@ -56,6 +56,19 @@ QMap<QString, QString> getSupportedLanguages() {
   return map;
 }
 
+QMap<QString, QString> getSupportedTimezones() {
+  QFile f(":/timezones.json");
+  f.open(QIODevice::ReadOnly | QIODevice::Text);
+  QString val = f.readAll();
+
+  QJsonObject obj = QJsonDocument::fromJson(val.toUtf8()).object();
+  QMap<QString, QString> map;
+  for (auto key : obj.keys()) {
+    map[key] = obj[key].toString();
+  }
+  return map;
+}
+
 QString timeAgo(const QDateTime &date) {
   int diff = date.secsTo(QDateTime::currentDateTimeUtc());
 

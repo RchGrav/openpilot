@@ -31,7 +31,8 @@ def get_default_params():
     ("LanguageSetting", "main_en"),
     ("OpenpilotEnabledToggle", "1"),
     ("LongitudinalPersonality", str(log.LongitudinalPersonality.standard)),
-    ("IsMetric", "1"),
+    ("IsMetric", "0"),
+    ("TimeZone", "America/New_York"),
 
     ("SearchInput", "0"),
     ("GMapKey", "0"),
