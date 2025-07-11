@@ -16,5 +16,6 @@
   <file>offroad/icon_wifi_strength_full.svg</file>
 
   <file alias="languages.json">../ui/translations/languages.json</file>
+  <file alias="timezones.json">../ui/translations/timezones.json</file>
 </qresource>
 </RCC>

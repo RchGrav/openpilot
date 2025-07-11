@@ -18,6 +18,7 @@ QString getBrand();
 QString getUserAgent();
 std::optional<QString> getDongleId();
 QMap<QString, QString> getSupportedLanguages();
+QMap<QString, QString> getSupportedTimezones();
 void setQtSurfaceFormat();
 void sigTermHandler(int s);
 QString timeAgo(const QDateTime &date);

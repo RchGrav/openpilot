@@ -338,6 +338,18 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   });
   addItem(translateBtn);
 
+  auto timezoneBtn = new ButtonControl(tr("Change Timezone"), tr("CHANGE"), "");
+  connect(timezoneBtn, &ButtonControl::clicked, [=]() {
+    QMap<QString, QString> zones = getSupportedTimezones();
+    QString current = QString::fromStdString(params.get("TimeZone"));
+    QString selection = MultiOptionDialog::getSelection(tr("Select a timezone"), zones.keys(), zones.key(current), this);
+    if (!selection.isEmpty()) {
+      params.put("TimeZone", zones[selection].toStdString());
+      QProcess::execute("sudo", {"timedatectl", "set-timezone", zones[selection]});
+    }
+  });
+  addItem(timezoneBtn);
+
   QObject::connect(uiState()->prime_state, &PrimeState::changed, [this] (PrimeState::Type type) {
     pair_device->setVisible(type == PrimeState::PRIME_TYPE_UNPAIRED);
   });

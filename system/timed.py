@@ -11,6 +11,17 @@ from openpilot.common.params import Params
 from openpilot.common.gps import get_gps_location_service
 
 
+def apply_timezone(params: Params, last_tz: str = "") -> str:
+  tz = params.get("TimeZone", encoding="utf8")
+  if tz and tz != last_tz:
+    try:
+      subprocess.run(["sudo", "timedatectl", "set-timezone", tz], check=True)
+    except subprocess.CalledProcessError:
+      cloudlog.exception("timed.failed_setting_timezone")
+    return tz
+  return last_tz
+
+
 def set_time(new_time):
   diff = datetime.datetime.now() - new_time
   if abs(diff) < datetime.timedelta(seconds=10):
@@ -37,6 +48,7 @@ def main() -> NoReturn:
 
   params = Params()
   gps_location_service = get_gps_location_service(params)
+  tz_last = apply_timezone(params)
 
   pm = messaging.PubMaster(['clocks'])
   sm = messaging.SubMaster([gps_location_service])
@@ -48,6 +60,7 @@ def main() -> NoReturn:
     msg.clocks.wallTimeNanos = time.time_ns()
     pm.send('clocks', msg)
 
+    tz_last = apply_timezone(params, tz_last)
     gps = sm[gps_location_service]
     gps_time = datetime.datetime.fromtimestamp(gps.unixTimestampMillis / 1000.)
     if not sm.updated[gps_location_service] or (time.monotonic() - sm.logMonoTime[gps_location_service] / 1e9) > 2.0:
